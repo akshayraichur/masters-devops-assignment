@@ -16,6 +16,17 @@ pipeline {
                 sh 'echo "Deploying application..."'
             }
         }
+
+        stage('Deploy to Staging') {
+            steps {
+                sh 'echo "Deploying to Staging Environment..."'
+            }
+        }
+        stage('Deploy to Production') {
+            steps {
+                sh 'echo "Deploying to Production Environment..."'
+            }
+        }
     }
     post {
         failure {
