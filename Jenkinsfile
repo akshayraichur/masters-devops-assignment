@@ -1,30 +1,25 @@
 pipeline {
     agent any
-
     stages {
-        stage('Checkout') {
+        stage('Build') {
             steps {
-                git branch: 'main', url: 'https://github.com/akshayraichur/masters-devops-assignment'
+                sh 'echo "Building the project..."'
             }
         }
-
-        stage('Deploy to Staging') {
+        stage('Test') {
             steps {
-                sh './deploy.sh staging'
+                sh 'echo "Running tests..."'
             }
         }
-
-        stage('Deploy to Production') {
+        stage('Deploy') {
             steps {
-                input "Deploy to production?"  // Manual approval
-                sh './deploy.sh production'
+                sh 'echo "Deploying application..."'
             }
         }
     }
-
     post {
         failure {
-            echo "Build failed! Check logs."
+            mail to: 'akshayraichur9@gmail.com', subject: 'Pipeline Failed', body: 'Check Jenkins logs.'
         }
     }
 }
